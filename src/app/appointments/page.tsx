@@ -12,7 +12,7 @@ export default function Appointments() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [appointments, setAppointments] = useState([
     {
-      doctor: 'Dr. Johnson',
+      doctor: 'Dr. Mohamed',
       specialty: 'Cardiology',
       date: 'Tomorrow, Dec 11',
       time: '10:00 AM',
@@ -21,7 +21,7 @@ export default function Appointments() {
       color: 'border-primary bg-primary-light'
     },
     {
-      doctor: 'Dr. Smith',
+      doctor: 'Dr. Ali',
       specialty: 'General Practice',
       date: 'Dec 18, 2025',
       time: '2:00 PM',
@@ -30,7 +30,7 @@ export default function Appointments() {
       color: 'border-neutral-border'
     },
     {
-      doctor: 'Dr. Williams',
+      doctor: 'Dr. Moussa',
       specialty: 'Ophthalmology',
       date: 'Dec 28, 2025',
       time: '11:30 AM',
@@ -68,7 +68,7 @@ export default function Appointments() {
   }
   const pastAppointments = [
     {
-      doctor: 'Dr. Brown',
+      doctor: 'Dr. Ali',
       specialty: 'Neurology',
       date: 'Dec 3, 2025',
       time: '9:00 AM',
@@ -106,15 +106,15 @@ export default function Appointments() {
 
         {/* Calendar Overview */}
         <Card className="bg-info/5 border-info">
-          <div className="flex items-center gap-3">
-            <Calendar className="text-info" size={28} />
-            <div>
-              <h3 className="font-semibold text-lg">Next Appointment</h3>
-              <p className="text-neutral-textSecondary">
-                <span className="font-bold">Tomorrow</span> with Dr. Johnson at 10:00 AM
-              </p>
+            <div className="flex items-center gap-3">
+              <Calendar className="text-info" size={28} />
+              <div>
+                <h3 className="font-semibold text-lg">Next Appointment</h3>
+                <p className="text-neutral-textSecondary">
+                  <span className="font-bold">Tomorrow</span> with Dr. Mohamed at 10:00 AM
+                </p>
+              </div>
             </div>
-          </div>
         </Card>
 
         {/* Upcoming Appointments */}

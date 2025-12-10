@@ -9,28 +9,28 @@ export default function MedicalRecords() {
       title: 'Lab Results - Blood Test',
       date: 'Dec 5, 2025',
       type: 'Lab Report',
-      doctor: 'Dr. Johnson',
+      doctor: 'Dr. Mohamed',
       color: 'bg-blue-50 border-blue-200'
     },
     {
       title: 'Prescription - Metformin',
       date: 'Nov 28, 2025',
       type: 'Prescription',
-      doctor: 'Dr. Smith',
+      doctor: 'Dr. Ali',
       color: 'bg-green-50 border-green-200'
     },
     {
       title: 'X-Ray - Chest',
       date: 'Nov 15, 2025',
       type: 'Imaging',
-      doctor: 'Dr. Williams',
+      doctor: 'Dr. Moussa',
       color: 'bg-purple-50 border-purple-200'
     },
     {
       title: 'Consultation Notes',
       date: 'Nov 10, 2025',
       type: 'Consultation',
-      doctor: 'Dr. Brown',
+      doctor: 'Dr. Ali',
       color: 'bg-orange-50 border-orange-200'
     },
   ]

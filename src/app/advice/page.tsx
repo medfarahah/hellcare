@@ -6,7 +6,7 @@ import { Plus, Stethoscope, Calendar, AlertCircle } from 'lucide-react'
 export default function DoctorAdvice() {
   const adviceList = [
     {
-      doctor: 'Dr. Johnson',
+      doctor: 'Dr. Mohamed',
       specialty: 'Cardiology',
       date: 'Dec 5, 2025',
       title: 'Exercise Recommendations',
@@ -15,7 +15,7 @@ export default function DoctorAdvice() {
       color: 'border-blue-200 bg-blue-50'
     },
     {
-      doctor: 'Dr. Smith',
+      doctor: 'Dr. Ali',
       specialty: 'General Practice',
       date: 'Nov 28, 2025',
       title: 'Medication Timing',
@@ -24,7 +24,7 @@ export default function DoctorAdvice() {
       color: 'border-warning bg-warning/10'
     },
     {
-      doctor: 'Dr. Williams',
+      doctor: 'Dr. Moussa',
       specialty: 'Ophthalmology',
       date: 'Nov 15, 2025',
       title: 'Eye Care Instructions',

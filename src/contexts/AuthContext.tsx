@@ -23,16 +23,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const DEMO_USERS = [
   {
     id: '1',
-    email: 'sarah@demo.com',
+    email: 'patient@demo.com',
     password: 'demo123',
-    name: 'Sarah Anderson',
+    name: 'Abdifatah Ismail',
     role: 'patient' as const
   },
   {
     id: '2',
     email: 'caregiver@demo.com',
     password: 'demo123',
-    name: 'John Anderson',
+    name: 'Mohamed',
     role: 'caregiver' as const
   }
 ]

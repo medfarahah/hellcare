@@ -14,18 +14,18 @@ export default function EmergencyContacts() {
       color: 'border-error bg-error/10'
     },
     {
-      name: 'Dr. Johnson (Cardiologist)',
+      name: 'Dr. Mohamed (Cardiologist)',
       relationship: 'Primary Doctor',
-      phone: '+1 (555) 123-4567',
-      email: 'dr.johnson@medical.com',
+      phone: '+253 21 35 00 00',
+      email: 'dr.mohamed@medical.dj',
       priority: 'high',
       color: 'border-warning bg-warning/10'
     },
     {
-      name: 'City Hospital',
+      name: 'Peltier Hospital',
       relationship: 'Hospital',
-      phone: '+1 (555) 987-6543',
-      email: 'info@cityhospital.com',
+      phone: '+253 21 35 22 31',
+      email: 'info@hopital-peltier.dj',
       priority: 'high',
       color: 'border-warning bg-warning/10'
     },
@@ -33,22 +33,22 @@ export default function EmergencyContacts() {
 
   const familyContacts = [
     {
-      name: 'John Anderson',
+      name: 'Mohamed',
       relationship: 'Son',
-      phone: '+1 (555) 234-5678',
-      email: 'john.anderson@email.com',
+      phone: '+253 77 12 34 56',
+      email: 'mohamed@email.dj',
     },
     {
-      name: 'Mary Anderson',
+      name: 'Fatima Hassan',
       relationship: 'Daughter',
-      phone: '+1 (555) 345-6789',
-      email: 'mary.anderson@email.com',
+      phone: '+253 77 23 45 67',
+      email: 'fatima.hassan@email.dj',
     },
     {
-      name: 'Lisa Brown',
+      name: 'Ahmed Ibrahim',
       relationship: 'Caregiver',
-      phone: '+1 (555) 456-7890',
-      email: 'lisa.brown@care.com',
+      phone: '+253 77 34 56 78',
+      email: 'ahmed.ibrahim@care.dj',
     },
   ]
 

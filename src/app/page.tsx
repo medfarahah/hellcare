@@ -117,7 +117,7 @@ export default function Dashboard() {
                 <Calendar className="text-white" size={28} />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg mb-1">Dr. Johnson - Cardiology</p>
+                <p className="font-bold text-lg mb-1">Dr. Mohamed - Cardiology</p>
                 <p className="text-neutral-textSecondary mb-2">Tomorrow, Dec 11 at 10:00 AM</p>
                 <p className="text-sm text-neutral-textSecondary">City Medical Center, Room 302</p>
               </div>

@@ -120,11 +120,11 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ### 🔐 Demo Credentials (MVP)
 
-**Patient Account:**
-- Email: `sarah@demo.com`
+**Patient Account (Abdifatah Ismail):**
+- Email: `patient@demo.com`
 - Password: `demo123`
 
-**Caregiver Account:**
+**Caregiver Account (Mohamed):**
 - Email: `caregiver@demo.com`
 - Password: `demo123`
 

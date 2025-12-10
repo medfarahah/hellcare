@@ -98,13 +98,13 @@ export default function BookAppointmentModal({ isOpen, onClose, onSubmit }: Book
               <User size={20} className="text-primary" />
               Doctor Name *
             </label>
-            <input
-              type="text"
-              value={formData.doctorName}
-              onChange={(e) => handleChange('doctorName', e.target.value)}
-              className={`input ${errors.doctorName ? 'border-error' : ''}`}
-              placeholder="Dr. Smith"
-            />
+              <input
+                type="text"
+                value={formData.doctorName}
+                onChange={(e) => handleChange('doctorName', e.target.value)}
+                className={`input ${errors.doctorName ? 'border-error' : ''}`}
+                placeholder="Dr. Mohamed"
+              />
             {errors.doctorName && (
               <p className="text-error text-sm mt-1">{errors.doctorName}</p>
             )}

@@ -64,7 +64,7 @@ export default function Profile() {
                 <Phone className="text-primary" size={24} />
                 <div>
                   <p className="text-sm text-neutral-textSecondary">Phone</p>
-                  <p className="font-semibold text-lg">+1 (555) 123-4567</p>
+                  <p className="font-semibold text-lg">+253 77 12 34 56</p>
                 </div>
               </div>
 
@@ -72,7 +72,7 @@ export default function Profile() {
                 <Calendar className="text-primary" size={24} />
                 <div>
                   <p className="text-sm text-neutral-textSecondary">Date of Birth</p>
-                  <p className="font-semibold text-lg">March 15, 1950</p>
+                  <p className="font-semibold text-lg">January 15, 1955</p>
                 </div>
               </div>
 
@@ -80,7 +80,7 @@ export default function Profile() {
                 <MapPin className="text-primary" size={24} />
                 <div>
                   <p className="text-sm text-neutral-textSecondary">Address</p>
-                  <p className="font-semibold text-lg">123 Main Street, City, State 12345</p>
+                  <p className="font-semibold text-lg">Quartier 7, Djibouti City, Djibouti</p>
                 </div>
               </div>
             </div>

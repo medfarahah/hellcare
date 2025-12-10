@@ -29,7 +29,7 @@ export default function Login() {
 
   const fillDemoCredentials = (userType: 'patient' | 'caregiver') => {
     if (userType === 'patient') {
-      setEmail('sarah@demo.com')
+      setEmail('patient@demo.com')
       setPassword('demo123')
     } else {
       setEmail('caregiver@demo.com')
@@ -156,7 +156,7 @@ export default function Login() {
                   </button>
                 </div>
                 <p className="text-sm text-neutral-textSecondary">
-                  <span className="font-semibold">Email:</span> sarah@demo.com
+                  <span className="font-semibold">Email:</span> patient@demo.com
                 </p>
                 <p className="text-sm text-neutral-textSecondary">
                   <span className="font-semibold">Password:</span> demo123
