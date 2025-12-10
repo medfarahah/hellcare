@@ -128,6 +128,20 @@ Open [http://localhost:3000](http://localhost:3000)
 - Email: `caregiver@demo.com`
 - Password: `demo123`
 
+## 💳 Subscription Plans
+
+DjibCare offers two subscription tiers:
+
+### Standard Plan
+- **3,000 DJF** per month
+- **30,000 DJF** per year (save 17%)
+- Essential health tracking features
+
+### Premium Plan  
+- **5,000 DJF** per month
+- **50,000 DJF** per year (save 17%)
+- All features + advanced analytics & priority support
+
 ---
 
 ## 📦 Tech Stack

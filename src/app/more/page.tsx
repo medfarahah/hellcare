@@ -3,7 +3,7 @@
 import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import { useAuth } from '@/contexts/AuthContext'
-import { FileText, Stethoscope, Activity, Phone, User, Settings, HelpCircle, LogOut, ChevronRight } from 'lucide-react'
+import { FileText, Stethoscope, Activity, Phone, User, Settings, HelpCircle, LogOut, ChevronRight, Crown } from 'lucide-react'
 import Link from 'next/link'
 
 export default function More() {
@@ -20,6 +20,15 @@ export default function More() {
     { icon: Settings, label: 'App Settings', path: '/settings', color: 'text-gray-500 bg-gray-50' },
     { icon: HelpCircle, label: 'Help & Support', path: '/help', color: 'text-gray-500 bg-gray-50' },
   ]
+
+  const subscriptionItem = { 
+    icon: ChevronRight, 
+    label: 'Subscription Plans', 
+    path: '/subscription', 
+    color: 'text-warning bg-warning/10',
+    iconColor: 'text-warning',
+    iconComponent: ChevronRight
+  }
 
   return (
     <MainLayout>
@@ -67,6 +76,27 @@ export default function More() {
               )
             })}
           </div>
+        </div>
+
+        {/* Subscription */}
+        <div>
+          <h2 className="text-lg font-semibold mb-3 text-neutral-textSecondary">Subscription</h2>
+          <Link href="/subscription">
+            <Card className="hover:shadow-md transition-shadow cursor-pointer border-2 border-warning/30 bg-warning/5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-lg bg-warning/20">
+                    <Crown size={24} className="text-warning" />
+                  </div>
+                  <div>
+                    <span className="font-semibold text-lg">Subscription Plans</span>
+                    <p className="text-sm text-neutral-textSecondary">View pricing & upgrade</p>
+                  </div>
+                </div>
+                <ChevronRight className="text-neutral-textSecondary" size={24} />
+              </div>
+            </Card>
+          </Link>
         </div>
 
         {/* Account & Settings */}

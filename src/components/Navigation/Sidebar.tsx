@@ -1,6 +1,6 @@
 'use client'
 
-import { Home, Pill, Calendar, FileText, Stethoscope, Activity, Phone, User, LogOut } from 'lucide-react'
+import { Home, Pill, Calendar, FileText, Stethoscope, Activity, Phone, User, LogOut, Crown } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
@@ -44,8 +44,22 @@ export default function Sidebar() {
         })}
       </nav>
       
-      {/* Logout Button at Bottom */}
+      {/* Bottom Actions */}
       <div className="border-t-2 border-neutral-border">
+        {/* Subscription Link */}
+        <Link
+          href="/subscription"
+          className={`flex items-center gap-4 px-6 py-4 transition-colors ${
+            pathname === '/subscription'
+              ? 'bg-warning/10 text-warning border-r-4 border-warning' 
+              : 'text-warning hover:bg-warning/5'
+          }`}
+        >
+          <Crown size={24} strokeWidth={2} />
+          <span className="text-base font-medium">Subscription</span>
+        </Link>
+        
+        {/* Logout Button */}
         <button
           onClick={logout}
           className="flex items-center gap-4 px-6 py-4 w-full text-error hover:bg-error/5 transition-colors"

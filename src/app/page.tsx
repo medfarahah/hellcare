@@ -5,7 +5,7 @@ import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
 import { useAuth } from '@/contexts/AuthContext'
-import { Pill, Calendar, Activity, AlertCircle, Clock, Plus } from 'lucide-react'
+import { Pill, Calendar, Activity, AlertCircle, Clock, Plus, Crown, ChevronRight } from 'lucide-react'
 
 export default function Dashboard() {
   const { user } = useAuth()
@@ -124,6 +124,23 @@ export default function Dashboard() {
             </div>
           </Card>
         </div>
+
+        {/* Subscription Promotion */}
+        <Card className="bg-gradient-to-r from-warning/10 to-warning/5 border-2 border-warning/30 cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => router.push('/subscription')}>
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex gap-3 items-center flex-1">
+              <div className="bg-warning/20 p-3 rounded-full">
+                <Crown className="text-warning" size={28} />
+              </div>
+              <div>
+                <p className="font-bold text-lg mb-1">Upgrade to Premium</p>
+                <p className="text-neutral-textSecondary">Starting from 3,000 DJF/month - Unlock all features!</p>
+              </div>
+            </div>
+            <ChevronRight className="text-warning flex-shrink-0" size={24} />
+          </div>
+        </Card>
 
         {/* Health Tips */}
         <Card className="bg-info/5 border-info">
