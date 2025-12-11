@@ -24,62 +24,62 @@ export default function AdminDashboard() {
 
   return (
     <MainLayout>
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6 overflow-x-hidden">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-info to-primary text-white rounded-2xl p-6">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2">Admin Dashboard</h1>
-          <p className="text-white/90 text-lg">Welcome back, {user.name}!</p>
+        <div className="bg-gradient-to-r from-info to-primary text-white rounded-2xl p-4 md:p-6">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">Admin Dashboard</h1>
+          <p className="text-white/90 text-base md:text-lg">Welcome back, {user.name}!</p>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="flex items-center gap-4 bg-blue-50 border-blue-200">
-            <div className="bg-blue-100 p-3 rounded-full">
-              <Users className="text-blue-600" size={28} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <Card className="flex items-center gap-3 bg-blue-50 border-blue-200 p-4">
+            <div className="bg-blue-100 p-2 md:p-3 rounded-full flex-shrink-0">
+              <Users className="text-blue-600" size={20} />
             </div>
-            <div>
-              <p className="text-2xl font-bold">127</p>
-              <p className="text-neutral-textSecondary">Total Users</p>
-            </div>
-          </Card>
-
-          <Card className="flex items-center gap-4 bg-green-50 border-green-200">
-            <div className="bg-green-100 p-3 rounded-full">
-              <Stethoscope className="text-green-600" size={28} />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">15</p>
-              <p className="text-neutral-textSecondary">Doctors</p>
+            <div className="min-w-0">
+              <p className="text-xl md:text-2xl font-bold">127</p>
+              <p className="text-neutral-textSecondary text-xs md:text-sm truncate">Total Users</p>
             </div>
           </Card>
 
-          <Card className="flex items-center gap-4 bg-purple-50 border-purple-200">
-            <div className="bg-purple-100 p-3 rounded-full">
-              <Crown className="text-purple-600" size={28} />
+          <Card className="flex items-center gap-3 bg-green-50 border-green-200 p-4">
+            <div className="bg-green-100 p-2 md:p-3 rounded-full flex-shrink-0">
+              <Stethoscope className="text-green-600" size={20} />
             </div>
-            <div>
-              <p className="text-2xl font-bold">89</p>
-              <p className="text-neutral-textSecondary">Subscriptions</p>
+            <div className="min-w-0">
+              <p className="text-xl md:text-2xl font-bold">15</p>
+              <p className="text-neutral-textSecondary text-xs md:text-sm truncate">Doctors</p>
             </div>
           </Card>
 
-          <Card className="flex items-center gap-4 bg-orange-50 border-orange-200">
-            <div className="bg-orange-100 p-3 rounded-full">
-              <DollarSign className="text-orange-600" size={28} />
+          <Card className="flex items-center gap-3 bg-purple-50 border-purple-200 p-4">
+            <div className="bg-purple-100 p-2 md:p-3 rounded-full flex-shrink-0">
+              <Crown className="text-purple-600" size={20} />
             </div>
-            <div>
-              <p className="text-2xl font-bold">325K</p>
-              <p className="text-neutral-textSecondary text-sm">Revenue (DJF)</p>
+            <div className="min-w-0">
+              <p className="text-xl md:text-2xl font-bold">89</p>
+              <p className="text-neutral-textSecondary text-xs md:text-sm truncate">Plans</p>
+            </div>
+          </Card>
+
+          <Card className="flex items-center gap-3 bg-orange-50 border-orange-200 p-4 col-span-2 md:col-span-1">
+            <div className="bg-orange-100 p-2 md:p-3 rounded-full flex-shrink-0">
+              <DollarSign className="text-orange-600" size={20} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xl md:text-2xl font-bold">325K</p>
+              <p className="text-neutral-textSecondary text-xs md:text-sm truncate">Revenue</p>
             </div>
           </Card>
         </div>
 
         {/* User Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
           <Card>
-            <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <Users size={20} className="text-primary" />
-              User Distribution
+            <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
+              <Users size={18} className="text-primary flex-shrink-0" />
+              <span className="truncate">User Distribution</span>
             </h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -202,23 +202,23 @@ export default function AdminDashboard() {
 
         {/* Quick Actions */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Button variant="secondary" className="flex-col h-auto py-4" onClick={() => router.push('/admin/users')}>
-              <Users size={24} className="mb-2" />
-              <span>Manage Users</span>
+          <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+            <Button variant="secondary" className="flex-col h-auto py-3 md:py-4 text-sm" onClick={() => router.push('/admin/users')}>
+              <Users size={20} className="mb-1 md:mb-2" />
+              <span className="text-xs md:text-sm">Users</span>
             </Button>
-            <Button variant="secondary" className="flex-col h-auto py-4" onClick={() => router.push('/admin/doctors')}>
-              <Stethoscope size={24} className="mb-2" />
-              <span>Manage Doctors</span>
+            <Button variant="secondary" className="flex-col h-auto py-3 md:py-4 text-sm" onClick={() => router.push('/admin/doctors')}>
+              <Stethoscope size={20} className="mb-1 md:mb-2" />
+              <span className="text-xs md:text-sm">Doctors</span>
             </Button>
-            <Button variant="secondary" className="flex-col h-auto py-4" onClick={() => router.push('/admin/subscriptions')}>
-              <Crown size={24} className="mb-2" />
-              <span>Subscriptions</span>
+            <Button variant="secondary" className="flex-col h-auto py-3 md:py-4 text-sm" onClick={() => router.push('/admin/subscriptions')}>
+              <Crown size={20} className="mb-1 md:mb-2" />
+              <span className="text-xs md:text-sm">Plans</span>
             </Button>
-            <Button variant="secondary" className="flex-col h-auto py-4" onClick={() => router.push('/admin/reports')}>
-              <TrendingUp size={24} className="mb-2" />
-              <span>Reports</span>
+            <Button variant="secondary" className="flex-col h-auto py-3 md:py-4 text-sm" onClick={() => router.push('/admin/reports')}>
+              <TrendingUp size={20} className="mb-1 md:mb-2" />
+              <span className="text-xs md:text-sm">Reports</span>
             </Button>
           </div>
         </div>
