@@ -126,21 +126,22 @@ export default function Dashboard() {
         </div>
 
         {/* Subscription Promotion */}
-        <Card className="bg-gradient-to-r from-warning/10 to-warning/5 border-2 border-warning/30 cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => router.push('/subscription')}>
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex gap-3 items-center flex-1">
-              <div className="bg-warning/20 p-3 rounded-full">
-                <Crown className="text-warning" size={28} />
+        <div onClick={() => router.push('/subscription')} className="cursor-pointer">
+          <Card className="bg-gradient-to-r from-warning/10 to-warning/5 border-2 border-warning/30 hover:shadow-lg transition-shadow">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex gap-3 items-center flex-1">
+                <div className="bg-warning/20 p-3 rounded-full">
+                  <Crown className="text-warning" size={28} />
+                </div>
+                <div>
+                  <p className="font-bold text-lg mb-1">Upgrade to Premium</p>
+                  <p className="text-neutral-textSecondary">Starting from 3,000 DJF/month - Unlock all features!</p>
+                </div>
               </div>
-              <div>
-                <p className="font-bold text-lg mb-1">Upgrade to Premium</p>
-                <p className="text-neutral-textSecondary">Starting from 3,000 DJF/month - Unlock all features!</p>
-              </div>
+              <ChevronRight className="text-warning flex-shrink-0" size={24} />
             </div>
-            <ChevronRight className="text-warning flex-shrink-0" size={24} />
-          </div>
-        </Card>
+          </Card>
+        </div>
 
         {/* Health Tips */}
         <Card className="bg-info/5 border-info">
