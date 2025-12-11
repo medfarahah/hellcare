@@ -7,7 +7,7 @@ interface User {
   id: string
   name: string
   email: string
-  role: 'patient' | 'caregiver' | 'doctor'
+  role: 'patient' | 'caregiver' | 'doctor' | 'admin'
   specialty?: string
 }
 
@@ -59,6 +59,13 @@ const DEMO_USERS = [
     name: 'Dr. Moussa',
     role: 'doctor' as const,
     specialty: 'Ophthalmology'
+  },
+  {
+    id: '6',
+    email: 'admin@demo.com',
+    password: 'admin123',
+    name: 'Admin DjibCare',
+    role: 'admin' as const
   }
 ]
 
@@ -86,6 +93,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!isLoading && user && user.role === 'doctor' && pathname === '/') {
       router.push('/doctor')
     }
+    // Redirect admins to admin dashboard
+    if (!isLoading && user && user.role === 'admin' && pathname === '/') {
+      router.push('/admin')
+    }
   }, [user, isLoading, pathname, router])
 
   const login = (email: string, password: string): boolean => {
@@ -106,6 +117,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Redirect based on role
       if (user.role === 'doctor') {
         router.push('/doctor')
+      } else if (user.role === 'admin') {
+        router.push('/admin')
       } else {
         router.push('/')
       }

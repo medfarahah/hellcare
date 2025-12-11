@@ -209,6 +209,32 @@ export default function Login() {
                 </p>
                 <p className="text-xs text-primary mt-1">Dr. Mohamed - Cardiology</p>
               </div>
+
+              <div className="bg-white p-4 rounded-lg border-2 border-info">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <User className="text-info" size={18} />
+                    <p className="font-semibold text-info">Admin Account</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setEmail('admin@demo.com')
+                      setPassword('admin123')
+                      setError('')
+                    }}
+                    className="text-primary text-sm font-semibold hover:underline"
+                  >
+                    Use This
+                  </button>
+                </div>
+                <p className="text-sm text-neutral-textSecondary">
+                  <span className="font-semibold">Email:</span> admin@demo.com
+                </p>
+                <p className="text-sm text-neutral-textSecondary">
+                  <span className="font-semibold">Password:</span> admin123
+                </p>
+                <p className="text-xs text-info mt-1">System Administrator</p>
+              </div>
             </div>
           </div>
         </Card>

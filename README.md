@@ -134,6 +134,11 @@ Open [http://localhost:3000](http://localhost:3000)
 - Specialty: Cardiology
 - Full doctor portal access
 
+**Admin Account:**
+- Email: `admin@demo.com`
+- Password: `admin123`
+- System administrator access
+
 ## 👨‍⚕️ Doctor Portal
 
 The doctor side includes:
@@ -145,6 +150,16 @@ The doctor side includes:
 - **Lab Results**: Review and approve laboratory test results
 
 See `DOCTOR_FEATURES.md` for complete documentation.
+
+## 👨‍💼 Admin Portal
+
+The admin side includes:
+- **Dashboard**: System overview, user statistics, revenue metrics
+- **User Management**: Manage patients and caregivers
+- **Doctor Management**: Verify and manage doctors
+- **Subscriptions**: Track and manage subscription plans
+- **Reports & Analytics**: View system performance and insights
+- Full control over the entire platform
 
 ## 💳 Subscription Plans
 

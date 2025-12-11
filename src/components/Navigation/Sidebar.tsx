@@ -1,6 +1,6 @@
 'use client'
 
-import { Home, Pill, Calendar, FileText, Stethoscope, Activity, Phone, User, LogOut, Crown, Users } from 'lucide-react'
+import { Home, Pill, Calendar, FileText, Stethoscope, Activity, Phone, User, LogOut, Crown, Users, UserCog, TrendingUp, Shield } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
@@ -8,6 +8,16 @@ import Link from 'next/link'
 export default function Sidebar() {
   const pathname = usePathname()
   const { user, logout } = useAuth()
+
+  // Admin navigation items
+  const adminNavItems = [
+    { icon: Home, label: 'Dashboard', path: '/admin' },
+    { icon: Users, label: 'Users', path: '/admin/users' },
+    { icon: Stethoscope, label: 'Doctors', path: '/admin/doctors' },
+    { icon: Crown, label: 'Subscriptions', path: '/admin/subscriptions' },
+    { icon: TrendingUp, label: 'Reports', path: '/admin/reports' },
+    { icon: Shield, label: 'Settings', path: '/admin/settings' },
+  ]
 
   // Doctor navigation items
   const doctorNavItems = [
@@ -32,7 +42,9 @@ export default function Sidebar() {
     { icon: User, label: 'Profile', path: '/profile' },
   ]
 
-  const navItems = user?.role === 'doctor' ? doctorNavItems : patientNavItems
+  let navItems = patientNavItems
+  if (user?.role === 'doctor') navItems = doctorNavItems
+  if (user?.role === 'admin') navItems = adminNavItems
 
   return (
     <aside className="hidden md:flex flex-col w-64 bg-white border-r-2 border-neutral-border min-h-screen sticky top-[73px] left-0">
@@ -61,7 +73,7 @@ export default function Sidebar() {
       {/* Bottom Actions */}
       <div className="border-t-2 border-neutral-border">
         {/* Subscription Link - Only for patients/caregivers */}
-        {user?.role !== 'doctor' && (
+        {user?.role !== 'doctor' && user?.role !== 'admin' && (
           <Link
             href="/subscription"
             className={`flex items-center gap-4 px-6 py-4 transition-colors ${
