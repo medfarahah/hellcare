@@ -1,20 +1,31 @@
 'use client'
 
-import { Home, Pill, Calendar, Menu, LogOut } from 'lucide-react'
+import { Home, Pill, Calendar, Menu, LogOut, Users, Stethoscope } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
 
 export default function BottomNav() {
   const pathname = usePathname()
-  const { logout } = useAuth()
+  const { user, logout } = useAuth()
 
-  const navItems = [
+  // Doctor navigation items
+  const doctorNavItems = [
+    { icon: Home, label: 'Home', path: '/doctor' },
+    { icon: Users, label: 'Patients', path: '/doctor/patients' },
+    { icon: Calendar, label: 'Appointments', path: '/doctor/appointments' },
+    { icon: Menu, label: 'More', path: '/more' },
+  ]
+
+  // Patient/Caregiver navigation items
+  const patientNavItems = [
     { icon: Home, label: 'Home', path: '/' },
     { icon: Pill, label: 'Medications', path: '/medications' },
     { icon: Calendar, label: 'Appointments', path: '/appointments' },
     { icon: Menu, label: 'More', path: '/more' },
   ]
+
+  const navItems = user?.role === 'doctor' ? doctorNavItems : patientNavItems
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-neutral-border md:hidden z-50">

@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  body {
+    @apply bg-neutral-bg text-neutral-text font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    @apply text-3xl font-bold text-neutral-text;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold text-neutral-text;
+  }
+
+  h3 {
+    @apply text-xl font-semibold text-neutral-text;
+  }
+
+  p {
+    @apply text-base text-neutral-text;
+  }
+}
+
+@layer components {
+  /* Card Component */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-neutral-border p-6;
+  }
+
+  /* Button Base */
+  .btn {
+    @apply min-h-touch px-6 py-3 rounded-lg font-semibold text-base transition-all duration-200 flex items-center justify-center gap-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-dark active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-primary border-2 border-primary hover:bg-primary-light active:scale-95;
+  }
+
+  /* Input Fields */
+  .input {
+    @apply w-full min-h-touch px-4 py-3 text-base border-2 border-neutral-border rounded-lg focus:outline-none focus:border-primary transition-colors;
+  }
+
+  /* Nav Item */
+  .nav-item {
+    @apply min-h-touch min-w-touch flex flex-col items-center justify-center gap-1 text-neutral-textSecondary hover:text-primary transition-colors cursor-pointer;
+  }
+
+  .nav-item.active {
+    @apply text-primary;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+

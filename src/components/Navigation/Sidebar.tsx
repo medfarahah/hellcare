@@ -1,15 +1,27 @@
 'use client'
 
-import { Home, Pill, Calendar, FileText, Stethoscope, Activity, Phone, User, LogOut, Crown } from 'lucide-react'
+import { Home, Pill, Calendar, FileText, Stethoscope, Activity, Phone, User, LogOut, Crown, Users } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
 
 export default function Sidebar() {
   const pathname = usePathname()
-  const { logout } = useAuth()
+  const { user, logout } = useAuth()
 
-  const navItems = [
+  // Doctor navigation items
+  const doctorNavItems = [
+    { icon: Home, label: 'Dashboard', path: '/doctor' },
+    { icon: Users, label: 'My Patients', path: '/doctor/patients' },
+    { icon: Calendar, label: 'Appointments', path: '/doctor/appointments' },
+    { icon: Stethoscope, label: 'Consultations', path: '/doctor/consultations' },
+    { icon: FileText, label: 'Prescriptions', path: '/doctor/prescriptions' },
+    { icon: Activity, label: 'Lab Results', path: '/doctor/lab-results' },
+    { icon: User, label: 'Profile', path: '/profile' },
+  ]
+
+  // Patient/Caregiver navigation items
+  const patientNavItems = [
     { icon: Home, label: 'Dashboard', path: '/' },
     { icon: Pill, label: 'Medications', path: '/medications' },
     { icon: Calendar, label: 'Appointments', path: '/appointments' },
@@ -19,6 +31,8 @@ export default function Sidebar() {
     { icon: Phone, label: 'Emergency Contacts', path: '/contacts' },
     { icon: User, label: 'Profile', path: '/profile' },
   ]
+
+  const navItems = user?.role === 'doctor' ? doctorNavItems : patientNavItems
 
   return (
     <aside className="hidden md:flex flex-col w-64 bg-white border-r-2 border-neutral-border min-h-screen sticky top-[73px] left-0">
@@ -46,18 +60,20 @@ export default function Sidebar() {
       
       {/* Bottom Actions */}
       <div className="border-t-2 border-neutral-border">
-        {/* Subscription Link */}
-        <Link
-          href="/subscription"
-          className={`flex items-center gap-4 px-6 py-4 transition-colors ${
-            pathname === '/subscription'
-              ? 'bg-warning/10 text-warning border-r-4 border-warning' 
-              : 'text-warning hover:bg-warning/5'
-          }`}
-        >
-          <Crown size={24} strokeWidth={2} />
-          <span className="text-base font-medium">Subscription</span>
-        </Link>
+        {/* Subscription Link - Only for patients/caregivers */}
+        {user?.role !== 'doctor' && (
+          <Link
+            href="/subscription"
+            className={`flex items-center gap-4 px-6 py-4 transition-colors ${
+              pathname === '/subscription'
+                ? 'bg-warning/10 text-warning border-r-4 border-warning' 
+                : 'text-warning hover:bg-warning/5'
+            }`}
+          >
+            <Crown size={24} strokeWidth={2} />
+            <span className="text-base font-medium">Subscription</span>
+          </Link>
+        )}
         
         {/* Logout Button */}
         <button

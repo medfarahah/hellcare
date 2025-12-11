@@ -7,7 +7,8 @@ interface User {
   id: string
   name: string
   email: string
-  role: 'patient' | 'caregiver'
+  role: 'patient' | 'caregiver' | 'doctor'
+  specialty?: string
 }
 
 interface AuthContextType {
@@ -34,6 +35,30 @@ const DEMO_USERS = [
     password: 'demo123',
     name: 'Mohamed',
     role: 'caregiver' as const
+  },
+  {
+    id: '3',
+    email: 'doctor@demo.com',
+    password: 'demo123',
+    name: 'Dr. Mohamed',
+    role: 'doctor' as const,
+    specialty: 'Cardiology'
+  },
+  {
+    id: '4',
+    email: 'dr.ali@demo.com',
+    password: 'demo123',
+    name: 'Dr. Ali',
+    role: 'doctor' as const,
+    specialty: 'General Practice'
+  },
+  {
+    id: '5',
+    email: 'dr.moussa@demo.com',
+    password: 'demo123',
+    name: 'Dr. Moussa',
+    role: 'doctor' as const,
+    specialty: 'Ophthalmology'
   }
 ]
 
@@ -57,6 +82,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!isLoading && !user && pathname !== '/login') {
       router.push('/login')
     }
+    // Redirect doctors to doctor dashboard
+    if (!isLoading && user && user.role === 'doctor' && pathname === '/') {
+      router.push('/doctor')
+    }
   }, [user, isLoading, pathname, router])
 
   const login = (email: string, password: string): boolean => {
@@ -69,11 +98,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: demoUser.id,
         name: demoUser.name,
         email: demoUser.email,
-        role: demoUser.role
+        role: demoUser.role,
+        specialty: demoUser.specialty
       }
       setUser(user)
       localStorage.setItem('djibcare_user', JSON.stringify(user))
-      router.push('/')
+      // Redirect based on role
+      if (user.role === 'doctor') {
+        router.push('/doctor')
+      } else {
+        router.push('/')
+      }
       return true
     }
     return false

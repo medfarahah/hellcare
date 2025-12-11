@@ -128,6 +128,24 @@ Open [http://localhost:3000](http://localhost:3000)
 - Email: `caregiver@demo.com`
 - Password: `demo123`
 
+**Doctor Account (Dr. Mohamed):**
+- Email: `doctor@demo.com`
+- Password: `demo123`
+- Specialty: Cardiology
+- Full doctor portal access
+
+## 👨‍⚕️ Doctor Portal
+
+The doctor side includes:
+- **Dashboard**: Quick stats, today's appointments, pending actions
+- **My Patients**: Search, view, and manage patient records
+- **Appointments**: Full appointment management with scheduling
+- **Consultations**: Detailed consultation notes and history
+- **Prescriptions**: Approve, manage, and track prescriptions
+- **Lab Results**: Review and approve laboratory test results
+
+See `DOCTOR_FEATURES.md` for complete documentation.
+
 ## 💳 Subscription Plans
 
 DjibCare offers two subscription tiers:
