@@ -32,5 +32,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# nested folders
+hellcare-main/
+*.zip
+
 
 
