@@ -1,9 +1,16 @@
+'use client'
+
+import { useState } from 'react'
 import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
+import EditModal from '@/components/Modals/EditModal'
 import { Plus, Clock, Pill } from 'lucide-react'
 
 export default function Medications() {
+  const [viewDetailsModal, setViewDetailsModal] = useState<any>(null)
+  const [editModal, setEditModal] = useState<any>(null)
   const medications = [
     { 
       name: 'Aspirin', 
@@ -89,10 +96,32 @@ export default function Medications() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Button variant="secondary" className="text-sm px-4 py-2 min-h-0">
+                  <Button 
+                    variant="secondary" 
+                    className="text-sm px-4 py-2 min-h-0"
+                    onClick={() => setEditModal({
+                      name: med.name,
+                      dosage: med.dosage,
+                      frequency: med.frequency,
+                      time: med.time
+                    })}
+                  >
                     Edit
                   </Button>
-                  <Button variant="secondary" className="text-sm px-4 py-2 min-h-0">
+                  <Button 
+                    variant="secondary" 
+                    className="text-sm px-4 py-2 min-h-0"
+                    onClick={() => setViewDetailsModal({
+                      'Medication Name': med.name,
+                      'Dosage': med.dosage,
+                      'Frequency': med.frequency,
+                      'Time': med.time,
+                      'Status': med.status,
+                      'Prescribed By': 'Dr. Mohamed',
+                      'Start Date': 'Jan 15, 2025',
+                      'Refills Remaining': '2'
+                    })}
+                  >
                     Details
                   </Button>
                 </div>
@@ -100,6 +129,34 @@ export default function Medications() {
             </Card>
           ))}
         </div>
+
+        {/* Modals */}
+        {viewDetailsModal && (
+          <ViewDetailsModal
+            isOpen={!!viewDetailsModal}
+            onClose={() => setViewDetailsModal(null)}
+            title="Medication Details"
+            data={viewDetailsModal}
+          />
+        )}
+
+        {editModal && (
+          <EditModal
+            isOpen={!!editModal}
+            onClose={() => setEditModal(null)}
+            title="Edit Medication"
+            fields={[
+              { key: 'name', label: 'Medication Name', type: 'text', placeholder: 'e.g., Aspirin' },
+              { key: 'dosage', label: 'Dosage', type: 'text', placeholder: 'e.g., 100mg' },
+              { key: 'frequency', label: 'Frequency', type: 'select', options: ['Once daily', 'Twice daily', 'Three times daily', 'As needed'] },
+              { key: 'time', label: 'Time(s)', type: 'text', placeholder: 'e.g., 8:00 AM' }
+            ]}
+            initialData={editModal}
+            onSave={(data) => {
+              alert(`Medication updated: ${data.name}`)
+            }}
+          />
+        )}
       </div>
     </MainLayout>
   )

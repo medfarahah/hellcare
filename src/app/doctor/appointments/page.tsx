@@ -3,11 +3,17 @@
 import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
+import ConfirmModal from '@/components/Modals/ConfirmModal'
+import EditModal from '@/components/Modals/EditModal'
 import { Calendar, Clock, User, MapPin, CheckCircle, XCircle, AlertCircle } from 'lucide-react'
 import { useState } from 'react'
 
 export default function DoctorAppointments() {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
+  const [viewModal, setViewModal] = useState<any>(null)
+  const [confirmModal, setConfirmModal] = useState<any>(null)
+  const [rescheduleModal, setRescheduleModal] = useState<any>(null)
 
   const appointments = [
     {
@@ -187,32 +193,77 @@ export default function DoctorAppointments() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap">
                     {appointment.status === 'scheduled' && (
                       <>
-                        <Button variant="primary" className="text-sm px-4 py-2">
+                        <Button 
+                          variant="primary" 
+                          className="text-sm px-4 py-2"
+                          onClick={() => alert(`Starting consultation with ${appointment.patient}`)}
+                        >
                           Start Consultation
                         </Button>
-                        <Button variant="secondary" className="text-sm px-4 py-2">
+                        <Button 
+                          variant="secondary" 
+                          className="text-sm px-4 py-2"
+                          onClick={() => setRescheduleModal({
+                            patient: appointment.patient,
+                            date: selectedDate,
+                            time: appointment.time
+                          })}
+                        >
                           Reschedule
                         </Button>
-                        <Button variant="secondary" className="text-sm px-4 py-2">
+                        <Button 
+                          variant="secondary" 
+                          className="text-sm px-4 py-2"
+                          onClick={() => setConfirmModal({
+                            type: 'cancel',
+                            patient: appointment.patient,
+                            time: appointment.time
+                          })}
+                        >
                           Cancel
                         </Button>
                       </>
                     )}
                     {appointment.status === 'in-progress' && (
                       <>
-                        <Button variant="primary" className="text-sm px-4 py-2">
+                        <Button 
+                          variant="primary" 
+                          className="text-sm px-4 py-2"
+                          onClick={() => setConfirmModal({
+                            type: 'complete',
+                            patient: appointment.patient,
+                            time: appointment.time
+                          })}
+                        >
                           Complete
                         </Button>
-                        <Button variant="secondary" className="text-sm px-4 py-2">
+                        <Button 
+                          variant="secondary" 
+                          className="text-sm px-4 py-2"
+                          onClick={() => alert('Add notes feature')}
+                        >
                           Add Notes
                         </Button>
                       </>
                     )}
                     {appointment.status === 'completed' && (
-                      <Button variant="secondary" className="text-sm px-4 py-2">
+                      <Button 
+                        variant="secondary" 
+                        className="text-sm px-4 py-2"
+                        onClick={() => setViewModal({
+                          'Patient': appointment.patient,
+                          'Patient ID': appointment.patientId,
+                          'Time': appointment.time,
+                          'Reason': appointment.reason,
+                          'Location': appointment.location,
+                          'Duration': appointment.duration,
+                          'Status': 'Completed',
+                          'Notes': 'Consultation completed successfully'
+                        })}
+                      >
                         View Details
                       </Button>
                     )}
@@ -222,6 +273,52 @@ export default function DoctorAppointments() {
             </Card>
           ))}
         </div>
+
+        {/* Modals */}
+        {viewModal && (
+          <ViewDetailsModal
+            isOpen={!!viewModal}
+            onClose={() => setViewModal(null)}
+            title="Appointment Details"
+            data={viewModal}
+          />
+        )}
+
+        {confirmModal && (
+          <ConfirmModal
+            isOpen={!!confirmModal}
+            onClose={() => setConfirmModal(null)}
+            onConfirm={() => {
+              if (confirmModal.type === 'complete') {
+                alert(`Consultation with ${confirmModal.patient} completed!`)
+              } else if (confirmModal.type === 'cancel') {
+                alert(`Appointment with ${confirmModal.patient} cancelled`)
+              }
+            }}
+            title={confirmModal?.type === 'complete' ? 'Complete Consultation' : 'Cancel Appointment'}
+            message={confirmModal?.type === 'complete' 
+              ? `Mark consultation with ${confirmModal?.patient} as complete?`
+              : `Cancel appointment with ${confirmModal?.patient} at ${confirmModal?.time}?`
+            }
+            confirmText={confirmModal?.type === 'complete' ? 'Yes, Complete' : 'Yes, Cancel'}
+            type={confirmModal?.type === 'complete' ? 'info' : 'danger'}
+          />
+        )}
+
+        {rescheduleModal && (
+          <EditModal
+            isOpen={!!rescheduleModal}
+            onClose={() => setRescheduleModal(null)}
+            title="Reschedule Appointment"
+            fields={[
+              { key: 'date', label: 'New Date', type: 'date' },
+              { key: 'time', label: 'New Time', type: 'time' },
+              { key: 'reason', label: 'Reason', type: 'textarea', placeholder: 'Reason for rescheduling...' }
+            ]}
+            initialData={rescheduleModal}
+            onSave={(data) => alert(`Appointment rescheduled to ${data.date} at ${data.time}`)}
+          />
+        )}
       </div>
     </MainLayout>
   )

@@ -4,12 +4,16 @@ import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
 import { useAuth } from '@/contexts/AuthContext'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
+import NotesModal from '@/components/Modals/NotesModal'
 import { Search, User, Phone, Mail, Calendar, FileText } from 'lucide-react'
 import { useState } from 'react'
 
 export default function DoctorPatients() {
   const { user } = useAuth()
   const [searchTerm, setSearchTerm] = useState('')
+  const [viewModal, setViewModal] = useState<any>(null)
+  const [notesModal, setNotesModal] = useState<any>(null)
 
   const patients = [
     {
@@ -171,15 +175,38 @@ export default function DoctorPatients() {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 pt-2">
-                  <Button variant="primary" className="flex-1 text-sm">
+                  <Button 
+                    variant="primary" 
+                    className="flex-1 text-sm"
+                    onClick={() => setViewModal({
+                      'Patient Name': patient.name,
+                      'Patient ID': patient.id,
+                      'Age': patient.age,
+                      'Gender': patient.gender,
+                      'Phone': patient.phone,
+                      'Email': patient.email,
+                      'Last Visit': patient.lastVisit,
+                      'Next Appointment': patient.nextAppointment,
+                      'Conditions': patient.conditions.join(', '),
+                      'Status': patient.status
+                    })}
+                  >
                     <FileText size={18} />
                     View Records
                   </Button>
-                  <Button variant="secondary" className="flex-1 text-sm">
+                  <Button 
+                    variant="secondary" 
+                    className="flex-1 text-sm"
+                    onClick={() => alert(`Schedule visit for ${patient.name}`)}
+                  >
                     <Calendar size={18} />
                     Schedule Visit
                   </Button>
-                  <Button variant="secondary" className="px-4 text-sm">
+                  <Button 
+                    variant="secondary" 
+                    className="px-4 text-sm"
+                    onClick={() => setNotesModal({ name: patient.name })}
+                  >
                     Add Note
                   </Button>
                 </div>
@@ -194,6 +221,25 @@ export default function DoctorPatients() {
               No patients found matching "{searchTerm}"
             </p>
           </Card>
+        )}
+
+        {/* Modals */}
+        {viewModal && (
+          <ViewDetailsModal
+            isOpen={!!viewModal}
+            onClose={() => setViewModal(null)}
+            title="Patient Details"
+            data={viewModal}
+          />
+        )}
+
+        {notesModal && (
+          <NotesModal
+            isOpen={!!notesModal}
+            onClose={() => setNotesModal(null)}
+            title={`Add Note - ${notesModal?.name}`}
+            onSave={(note) => alert('Note saved successfully!')}
+          />
         )}
       </div>
     </MainLayout>

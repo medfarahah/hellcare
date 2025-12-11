@@ -1,9 +1,16 @@
+'use client'
+
+import { useState } from 'react'
 import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
+import EditModal from '@/components/Modals/EditModal'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
 import { Plus, Activity, Heart, Droplet, Weight, TrendingUp, TrendingDown } from 'lucide-react'
 
 export default function Vitals() {
+  const [editModal, setEditModal] = useState<any>(null)
+  const [historyModal, setHistoryModal] = useState<any>(null)
   const vitals = [
     {
       name: 'Blood Pressure',
@@ -105,10 +112,32 @@ export default function Vitals() {
                   </div>
 
                   <div className="flex gap-2 pt-2">
-                    <Button variant="primary" className="flex-1 text-sm px-4 py-2">
+                    <Button 
+                      variant="primary" 
+                      className="flex-1 text-sm px-4 py-2"
+                      onClick={() => setEditModal({
+                        vitalType: vital.name,
+                        value: vital.value,
+                        unit: vital.unit,
+                        date: new Date().toISOString().split('T')[0],
+                        time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+                      })}
+                    >
                       Update
                     </Button>
-                    <Button variant="secondary" className="flex-1 text-sm px-4 py-2">
+                    <Button 
+                      variant="secondary" 
+                      className="flex-1 text-sm px-4 py-2"
+                      onClick={() => setHistoryModal({
+                        'Vital Type': vital.name,
+                        'Current Value': `${vital.value} ${vital.unit}`,
+                        'Last Updated': vital.lastUpdated,
+                        'Trend': vital.trend,
+                        'Average (7 days)': `${vital.value} ${vital.unit}`,
+                        'Highest': `${parseInt(vital.value) + 5} ${vital.unit}`,
+                        'Lowest': `${parseInt(vital.value) - 3} ${vital.unit}`
+                      })}
+                    >
                       History
                     </Button>
                   </div>
@@ -147,6 +176,34 @@ export default function Vitals() {
             </div>
           </Card>
         </div>
+
+        {/* Modals */}
+        {editModal && (
+          <EditModal
+            isOpen={!!editModal}
+            onClose={() => setEditModal(null)}
+            title={`Update ${editModal.vitalType}`}
+            fields={[
+              { key: 'value', label: 'Value', type: 'number', placeholder: 'Enter value' },
+              { key: 'date', label: 'Date', type: 'date' },
+              { key: 'time', label: 'Time', type: 'time' },
+              { key: 'notes', label: 'Notes (Optional)', type: 'textarea', placeholder: 'Any additional notes...' }
+            ]}
+            initialData={editModal}
+            onSave={(data) => {
+              alert(`${editModal.vitalType} updated to ${data.value}`)
+            }}
+          />
+        )}
+
+        {historyModal && (
+          <ViewDetailsModal
+            isOpen={!!historyModal}
+            onClose={() => setHistoryModal(null)}
+            title="Vital History"
+            data={historyModal}
+          />
+        )}
       </div>
     </MainLayout>
   )

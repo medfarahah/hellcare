@@ -5,11 +5,19 @@ import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
 import BookAppointmentModal, { AppointmentData } from '@/components/Appointments/BookAppointmentModal'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
+import EditModal from '@/components/Modals/EditModal'
+import ConfirmModal from '@/components/Modals/ConfirmModal'
+import NotesModal from '@/components/Modals/NotesModal'
 import { Plus, Calendar, MapPin, Clock, CheckCircle } from 'lucide-react'
 
 export default function Appointments() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [viewDetailsModal, setViewDetailsModal] = useState<any>(null)
+  const [editModal, setEditModal] = useState<any>(null)
+  const [cancelModal, setCancelModal] = useState<any>(null)
+  const [notesModal, setNotesModal] = useState<any>(null)
   const [appointments, setAppointments] = useState([
     {
       doctor: 'Dr. Mohamed',
@@ -152,10 +160,30 @@ export default function Appointments() {
                   </div>
 
                   <div className="flex gap-2 pt-2">
-                    <Button variant="primary" className="flex-1 text-sm px-4 py-2">
+                    <Button 
+                      variant="primary" 
+                      className="flex-1 text-sm px-4 py-2"
+                      onClick={() => setViewDetailsModal({
+                        'Doctor': apt.doctor,
+                        'Specialty': apt.specialty,
+                        'Date': apt.date,
+                        'Time': apt.time,
+                        'Location': apt.location,
+                        'Status': apt.status
+                      })}
+                    >
                       View Details
                     </Button>
-                    <Button variant="secondary" className="flex-1 text-sm px-4 py-2">
+                    <Button 
+                      variant="secondary" 
+                      className="flex-1 text-sm px-4 py-2"
+                      onClick={() => setEditModal({
+                        doctor: apt.doctor,
+                        date: apt.date,
+                        time: apt.time,
+                        location: apt.location
+                      })}
+                    >
                       Reschedule
                     </Button>
                   </div>
@@ -171,16 +199,20 @@ export default function Appointments() {
           <div className="space-y-3">
             {pastAppointments.map((apt, index) => (
               <Card key={index} className="bg-neutral-bg/50">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-semibold text-lg">{apt.doctor}</h3>
-                    <p className="text-neutral-textSecondary">{apt.specialty}</p>
-                    <p className="text-sm text-neutral-textSecondary mt-1">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-base md:text-lg truncate">{apt.doctor}</h3>
+                    <p className="text-neutral-textSecondary text-sm truncate">{apt.specialty}</p>
+                    <p className="text-xs md:text-sm text-neutral-textSecondary mt-1">
                       {apt.date} at {apt.time}
                     </p>
                   </div>
-                  <Button variant="secondary" className="text-sm px-4 py-2 min-h-0">
-                    View Notes
+                  <Button 
+                    variant="secondary" 
+                    className="text-xs md:text-sm px-3 md:px-4 py-2 min-h-0 flex-shrink-0"
+                    onClick={() => setNotesModal({ doctor: apt.doctor, date: apt.date })}
+                  >
+                    Notes
                   </Button>
                 </div>
               </Card>
@@ -188,12 +220,66 @@ export default function Appointments() {
           </div>
         </div>
 
-        {/* Book Appointment Modal */}
+        {/* Modals */}
         <BookAppointmentModal 
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleBookAppointment}
         />
+
+        {viewDetailsModal && (
+          <ViewDetailsModal
+            isOpen={!!viewDetailsModal}
+            onClose={() => setViewDetailsModal(null)}
+            title="Appointment Details"
+            data={viewDetailsModal}
+          />
+        )}
+
+        {editModal && (
+          <EditModal
+            isOpen={!!editModal}
+            onClose={() => setEditModal(null)}
+            title="Reschedule Appointment"
+            fields={[
+              { key: 'doctor', label: 'Doctor', type: 'text' },
+              { key: 'date', label: 'Date', type: 'date' },
+              { key: 'time', label: 'Time', type: 'time' },
+              { key: 'location', label: 'Location', type: 'text' }
+            ]}
+            initialData={editModal}
+            onSave={(data) => {
+              alert(`Appointment rescheduled for ${data.date} at ${data.time}`)
+            }}
+          />
+        )}
+
+        {notesModal && (
+          <NotesModal
+            isOpen={!!notesModal}
+            onClose={() => setNotesModal(null)}
+            title={`Notes - ${notesModal.doctor}`}
+            initialNote={`Visited ${notesModal.doctor} on ${notesModal.date}. All checkups completed successfully.`}
+            onSave={(note) => {
+              alert('Notes saved!')
+            }}
+          />
+        )}
+
+        {cancelModal && (
+          <ConfirmModal
+            isOpen={!!cancelModal}
+            onClose={() => setCancelModal(null)}
+            onConfirm={() => {
+              alert('Appointment cancelled')
+            }}
+            title="Cancel Appointment"
+            message="Are you sure you want to cancel this appointment? This action cannot be undone."
+            confirmText="Yes, Cancel"
+            cancelText="No, Keep It"
+            type="danger"
+          />
+        )}
       </div>
     </MainLayout>
   )

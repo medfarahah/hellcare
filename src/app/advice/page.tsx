@@ -1,9 +1,16 @@
+'use client'
+
+import { useState } from 'react'
 import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
+import NotesModal from '@/components/Modals/NotesModal'
 import { Plus, Stethoscope, Calendar, AlertCircle } from 'lucide-react'
 
 export default function DoctorAdvice() {
+  const [viewModal, setViewModal] = useState<any>(null)
+  const [notesModal, setNotesModal] = useState(false)
   const adviceList = [
     {
       doctor: 'Dr. Mohamed',
@@ -96,7 +103,18 @@ export default function DoctorAdvice() {
                     <Calendar size={16} />
                     <span>{item.date}</span>
                   </div>
-                  <Button variant="secondary" className="text-sm px-4 py-2 min-h-0">
+                  <Button 
+                    variant="secondary" 
+                    className="text-sm px-4 py-2 min-h-0"
+                    onClick={() => setViewModal({
+                      'Title': item.title,
+                      'Doctor': item.doctor,
+                      'Specialty': item.specialty,
+                      'Date': item.date,
+                      'Priority': item.priority,
+                      'Advice': item.advice
+                    })}
+                  >
                     View Details
                   </Button>
                 </div>
@@ -117,6 +135,25 @@ export default function DoctorAdvice() {
             </div>
           </div>
         </Card>
+
+        {/* Modals */}
+        {viewModal && (
+          <ViewDetailsModal
+            isOpen={!!viewModal}
+            onClose={() => setViewModal(null)}
+            title="Advice Details"
+            data={viewModal}
+          />
+        )}
+
+        {notesModal && (
+          <NotesModal
+            isOpen={notesModal}
+            onClose={() => setNotesModal(false)}
+            title="Add Personal Note"
+            onSave={(note) => alert('Note saved!')}
+          />
+        )}
       </div>
     </MainLayout>
   )

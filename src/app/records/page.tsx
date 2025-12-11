@@ -1,9 +1,16 @@
+'use client'
+
+import { useState } from 'react'
 import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
+import ViewDetailsModal from '@/components/Modals/ViewDetailsModal'
+import ConfirmModal from '@/components/Modals/ConfirmModal'
 import { Plus, FileText, Download, Eye } from 'lucide-react'
 
 export default function MedicalRecords() {
+  const [viewModal, setViewModal] = useState<any>(null)
+  const [deleteModal, setDeleteModal] = useState<any>(null)
   const records = [
     {
       title: 'Lab Results - Blood Test',
@@ -115,10 +122,24 @@ export default function MedicalRecords() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <button className="min-h-touch min-w-touch flex items-center justify-center hover:bg-neutral-bg rounded-lg transition-colors">
+                    <button 
+                      className="min-h-touch min-w-touch flex items-center justify-center hover:bg-neutral-bg rounded-lg transition-colors"
+                      onClick={() => setViewModal({
+                        'Document Title': record.title,
+                        'Type': record.type,
+                        'Date': record.date,
+                        'Doctor': record.doctor,
+                        'File Size': '2.4 MB',
+                        'Format': 'PDF',
+                        'Status': 'Available'
+                      })}
+                    >
                       <Eye size={20} className="text-neutral-textSecondary" />
                     </button>
-                    <button className="min-h-touch min-w-touch flex items-center justify-center hover:bg-neutral-bg rounded-lg transition-colors">
+                    <button 
+                      className="min-h-touch min-w-touch flex items-center justify-center hover:bg-neutral-bg rounded-lg transition-colors"
+                      onClick={() => alert(`Downloading ${record.title}...`)}
+                    >
                       <Download size={20} className="text-neutral-textSecondary" />
                     </button>
                   </div>
@@ -127,6 +148,28 @@ export default function MedicalRecords() {
             ))}
           </div>
         </div>
+
+        {/* Modals */}
+        {viewModal && (
+          <ViewDetailsModal
+            isOpen={!!viewModal}
+            onClose={() => setViewModal(null)}
+            title="Document Details"
+            data={viewModal}
+          />
+        )}
+
+        {deleteModal && (
+          <ConfirmModal
+            isOpen={!!deleteModal}
+            onClose={() => setDeleteModal(null)}
+            onConfirm={() => alert('Document deleted')}
+            title="Delete Document"
+            message="Are you sure you want to delete this document? This action cannot be undone."
+            confirmText="Yes, Delete"
+            type="danger"
+          />
+        )}
       </div>
     </MainLayout>
   )
