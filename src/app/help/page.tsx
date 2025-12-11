@@ -4,7 +4,7 @@ import MainLayout from '@/components/Layout/MainLayout'
 import Card from '@/components/UI/Card'
 import Button from '@/components/UI/Button'
 import { useAuth } from '@/contexts/AuthContext'
-import { HelpCircle, Mail, Phone, MessageCircle, FileText, Video, Search } from 'lucide-react'
+import { HelpCircle, Mail, Phone, MessageCircle, FileText, Video, Search, Shield } from 'lucide-react'
 import { useState } from 'react'
 
 export default function HelpPage() {
